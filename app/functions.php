@@ -21,31 +21,34 @@ function showPhoto($checkBox = false)
  * Проверяет загружаемые картинки
  * @return mixed
  */
-function uploadFiles()
+function uploadFiles(): array
 {
     $count = count($_FILES['userFile']['name']);
     for ($i = 0; $i < $count; $i++) {
         if (!empty($_FILES['userFile']['error'][$i])) {
             $answer['error'] = 'Error!! File not uploaded';
-        } else {
-            $tmpPath = $_FILES['userFile']['tmp_name'][$i];
-            $uploadFile = PATH_UPLOAD . basename($_FILES['userFile']['name'][$i]);
-
-            $fileType = ['image/jpeg', 'image/png'];
-            $imageMime = @image_type_to_mime_type(exif_imagetype($tmpPath));
-
-            if (in_array($imageMime, $fileType)) {
-                if ($_FILES['userFile']['size'][$i] < MAX_FILE_SIZE) {
-                    if (move_uploaded_file($tmpPath, $uploadFile)) {
-                        $answer['success'] = "Successfully uploaded files <br>";
-                    }
-                } else {
-                    $answer['error'] = 'The file is very big';
-                }
-            } else {
-                $answer['error'] = '<strong>Only pictures!!</strong> <br>';
-            }
+            break;
         }
+        $tmpPath = $_FILES['userFile']['tmp_name'][$i];
+        $uploadFile = PATH_UPLOAD . basename($_FILES['userFile']['name'][$i]);
+
+        $fileType = ['image/jpeg', 'image/png'];
+        $imageMime = @image_type_to_mime_type(exif_imagetype($tmpPath));
+
+        if (!in_array($imageMime, $fileType)) {
+            $answer['error'] = '<strong>Only pictures!!</strong> <br>';
+            break;
+        }
+        if ($_FILES['userFile']['size'][$i] > MAX_FILE_SIZE) {
+            $answer['error'] = 'The file is very big';
+            break;
+        }
+        if (!move_uploaded_file($tmpPath, $uploadFile)) {
+            $answer['error'] = 'Ups';
+            break;
+        }
+        $answer['success'] = "Successfully uploaded files <br>";
     }
     return $answer;
+
 }
