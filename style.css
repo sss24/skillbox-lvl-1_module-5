@@ -1,0 +1,76 @@
+img {
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    text-align: center;
+}
+
+.gallery {
+    max-width: 912px;
+    margin: 50px auto;
+}
+
+.gallery__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery__item-img {
+    width: 300px;
+    margin: 2px;
+    font-size: 0;
+    transition: 0.5s;
+}
+
+.gallery__item-img:hover {
+    transform: scale(1.1);
+}
+
+.upload-date {
+    color: rebeccapurple;
+    margin-bottom: 4px;
+    margin-top: 9px;
+}
+
+.footer {
+    height: 450px;
+}
+/************/
+.gallery__list--vertical {
+    /*flex-direction: column;*/
+}
+
+.gallery__list--vertical .gallery__item {
+    width: 100px;
+    margin-right: 5px;
+}
+.gallery__list--vertical .gallery__item:hover {
+    transform: scale(1);
+}
+
+/****menu****/
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu__list {
+    display: flex;
+    justify-content: center;
+}
+
+.menu__item  a{
+    display: block;
+    padding: 3px 5px;
+}
+
+/****menu END****/
+
+.form-checkbox__submit {
+    display: block;
+    margin: 0 auto;
+}
+
