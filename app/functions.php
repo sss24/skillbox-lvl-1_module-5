@@ -13,7 +13,7 @@ function showPhoto($checkBox = false)
             $arrPictures[$v]['date'] = date("F d Y H:i:s.", filectime($pathPictures . $v));
         }
     }
-    
+
     empty($checkBox) ? require PATH_TEMPLATE . 'gallery_template.php' : require PATH_TEMPLATE . 'gallery_check-box_template.php';
 }
 
