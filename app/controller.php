@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['sendForm'])) {
     $count = count($_FILES['userFile']['name']);
 
     if ($count > 5) {
-        $answer['error'] = 'Max 5 files <br>';
+        $answer['error'][] = 'Max 5 files <br>';
     } else {
         $answer = uploadFiles();
     }

@@ -10,8 +10,19 @@
         </form>
         <br>
         <div>
-            <?= isset($answer['error']) ? $answer['error'] : ''; ?>
-            <?= isset($answer['success']) ? $answer['success'] : ''; ?>
+
+            <? if (!empty($answer['error'])): ?>
+                <? foreach ($answer['error'] as $k => $v): ?>
+                    <?= isset($v) ? $v : ''; ?>
+                <? endforeach; ?>
+            <? endif; ?>
+            <br>
+            <? if (!empty($answer['success'])): ?>
+                <? foreach ($answer['success'] as $k => $v): ?>
+                    <?= isset($v) ? $v : ''; ?>
+                <? endforeach; ?>
+            <? endif; ?>
+
         </div>
     </div>
 <? showPhoto(); ?>

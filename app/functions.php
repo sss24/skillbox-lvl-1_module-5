@@ -27,7 +27,7 @@ function uploadFiles(): array
     for ($i = 0; $i < $count; $i++) {
 
         if (!empty($_FILES['userFile']['error'][$i])) {
-            $answer['error'] = 'Error!! File not uploaded';
+            $answer['error'][$i] = 'Error!! File not uploaded';
             continue;
         }
         $tmpPath = $_FILES['userFile']['tmp_name'][$i];
@@ -42,18 +42,18 @@ function uploadFiles(): array
         }
 */
         if (!in_array($imageMime, $fileType)) {
-            $answer['error'] = '<strong>Only pictures!!</strong> <br>';
+            $answer['error'][$i] = "{$_FILES['userFile']['name'][$i]}: <strong>This isn't a picture!</strong> <br>";
             continue;
         }
         if ($_FILES['userFile']['size'][$i] > MAX_FILE_SIZE) {
-            $answer['error'] = 'The file is very big  <br>';
+            $answer['error'][$i] = "{$_FILES['userFile']['name'][$i]}:  <strong>The file is very big :( </strong><br>";
             continue;
         }
         if (!move_uploaded_file($tmpPath, $uploadFile)) {
-            $answer['error'] = 'Ups';
+            $answer['error'][$i] = 'Ups';
             continue;
         }
-        $answer['success'] = "Successfully uploaded files <br>";
+        $answer['success'][$i] = "{$_FILES['userFile']['name'][$i]}: Successfully uploaded!<br>";
     }
     return $answer;
 
