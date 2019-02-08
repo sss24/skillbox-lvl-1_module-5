@@ -25,6 +25,7 @@ function uploadFiles(): array
 {
     $count = count($_FILES['userFile']['name']);
     for ($i = 0; $i < $count; $i++) {
+
         if (!empty($_FILES['userFile']['error'][$i])) {
             $answer['error'] = 'Error!! File not uploaded';
             continue;
@@ -34,7 +35,12 @@ function uploadFiles(): array
 
         $fileType = ['image/jpeg', 'image/png'];
         $imageMime = @image_type_to_mime_type(exif_imagetype($tmpPath));
-
+/*
+        if (!in_array($_FILES['userFile']['type'][$i], $fileType)) {
+            $answer['error'] = '<strong>Only pictures!!</strong> <br>';
+            continue;
+        }
+*/
         if (!in_array($imageMime, $fileType)) {
             $answer['error'] = '<strong>Only pictures!!</strong> <br>';
             continue;
